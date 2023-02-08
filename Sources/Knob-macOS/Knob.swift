@@ -16,6 +16,11 @@ import AppKit
  */
 open class Knob: NSControl {
 
+    public enum Scale {
+        case logarithmic, linear
+    }
+    
+    public var scale: Scale = Scale.linear
   /// The minimum value reported by the control.
   public var minimumValue: Float = 0.0 { didSet { setValue(_value, animated: false) } }
 
@@ -384,7 +389,7 @@ extension Knob {
     indicator.move(to: CGPoint(x: radius, y: 0.0))
     indicator.line(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
     indicator.apply(.init(translationX: bounds.width / 2, y: bounds.height / 2)
-      .rotated(by: angle(for: (value - minimumValue)/(maximumValue-minimumValue))))
+      .rotated(by: CGFloat(angleForValue)))
     indicatorLayer.path = indicator.cgPath
   }
 
