@@ -384,7 +384,7 @@ extension Knob {
     indicator.move(to: CGPoint(x: radius, y: 0.0))
     indicator.line(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
     indicator.apply(.init(translationX: bounds.width / 2, y: bounds.height / 2)
-      .rotated(by: angle(for: value)))
+      .rotated(by: angle(for: value/(maximumValue-minimumValue))))
     indicatorLayer.path = indicator.cgPath
   }
 
